@@ -1,34 +1,35 @@
 import {Component} from 'react'
 
+import './index.css'
+
 class Welcome extends Component {
   state = {
-    subscription: 'Subscribe',
+    isSubscribed: false,
   }
 
-  subscribe = () => {
-    this.setState(prevState => ({
-      subscription: 'Subsrcibed',
-    }))
+  onSubscribe = () => {
+    this.setState(prevState => ({isSubscribed: !prevState.isSubscribed}))
   }
 
-  subscribed = () => {
-    this.setState(prevState => ({
-      subscription: 'Subsrcibe',
-    }))
+  getButtonText = () => {
+    const {isSubscribed} = this.state
+
+    return isSubscribed ? 'Subscribed' : 'Subscribe'
   }
 
   render() {
-    const {subscription, isSubscribed} = this.state
+    const buttonText = this.getButtonText()
 
     return (
-      <div className="container">
+      <div className="app-container">
         <h1 className="heading">Welcome</h1>
-        <p className="description">Thank You! Happy Learning</p>
-        <button type="button" onClick={this.subscribe}>
-          {subscription}
-        </button>
-        <button type="button" onClick={this.subscribed}>
-          {subscription}
+        <p className="description">Thank you! Happy Learning</p>
+        <button
+          type="button"
+          className="subscribe-button"
+          onClick={this.onSubscribe}
+        >
+          {buttonText}
         </button>
       </div>
     )
